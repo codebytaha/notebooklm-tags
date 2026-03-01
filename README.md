@@ -1,6 +1,10 @@
-# NotebookLM Tags
+# <img src="icons/logo.png" alt="NotebookLM Tags Logo" width="50" height="50" style="vertical-align: middle;"/> NotebookLM Tags
 
-A Chrome browser extension to organize your Google NotebookLM workspace. Add custom tags, organize notebooks into categories, and quickly filter through your projects.
+> A Chrome Extension to organize and tag your NotebookLM notebooks efficiently.
+
+---
+
+![App Demo](https://github.com/user-attachments/assets/4b8b1cbb-6a54-4fbd-aaae-ca819d697cc0)
 
 ## Features
 
@@ -10,6 +14,7 @@ A Chrome browser extension to organize your Google NotebookLM workspace. Add cus
 - **Local Storage**: All tags and metadata are stored locally on your device via Chrome sync storage. No external servers or telemetry.
 - **Import/Export**: Easily backup or migrate your organization system using JSON exports.
 
+![Popup Preview](https://github.com/user-attachments/assets/8bfe0929-b9b8-4830-95e0-4111c297d8c6)
 ## Installation
 
 ### From the Chrome Web Store
@@ -35,19 +40,28 @@ A Chrome browser extension to organize your Google NotebookLM workspace. Add cus
 4. Select a category and add your **Notebooks** to it.
 5. Native filter chips will now appear above your notebooks inside the NotebookLM dashboard interface.
 
-## Permissions
-
-The extension requires minimal permissions:
-- `storage`: Required to save your custom tags and category preferences locally.
-- `https://notebooklm.google.com/*`: Required to inject the filter UI and read notebook titles for tagging purposes.
 
 ## Development
+ 
+```
+notebooklm-tags/
+├── logo.png          # Extension logo
+├── manifest.json     # Chrome extension manifest
+├── popup.html        # Extension popup UI
+├── popup.js          # Popup logic
+├── content.js        # Content script injected into NotebookLM
+├── styles.css        # Styles for the extension
+└── README.md         # Project documentation
+```
 
-This extension uses vanilla JavaScript, CSS, and HTML. No build step is required. 
-- `manifest.json`: Extension execution and metadata.
-- `content.js`, `content.css`: Injected into the NotebookLM page to render the filter chips.
-- `background.js`: Service worker to handle cross-origin messaging and storage management.
-- `popup.html`, `popup.js`: The toolbar dropdown interface for managing tags.
+---
+## Contributing
+
+Contributions are welcome! Feel free to:
+- Open an [issue](https://github.com/codebytaha/notebooklm-tags/issues)
+- Submit a [pull request](https://github.com/codebytaha/notebooklm-tags/pulls)
+
+---
 
 ## License
 
