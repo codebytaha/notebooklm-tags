@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NotebookLM Tags</title>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* =====================
+       Root & Variables
+       ===================== */
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f1f3f4;
+      --bg-hover: #e8eaed;
+      --bg-active: #e8f0fe;
+      --text-primary: #202124;
+      --text-secondary: #5f6368;
+      --text-accent: #1a73e8;
+      --border-color: #dadce0;
+      --danger: #d93025;
+      --danger-bg: #fce8e6;
+      --success: #1e8e3e;
+      --font-family: 'Google Sans', 'Google Sans Text', Roboto, Arial, sans-serif;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-primary: #22262B;
+        --bg-secondary: #2d3136;
+        --bg-hover: #363b41;
+        --bg-active: #394457;
+        --text-primary: #e8eaed;
+        --text-secondary: #9aa0a6;
+        --text-accent: #8ab4f8;
+        --border-color: #3c4043;
+        --danger: #f28b82;
+        --danger-bg: #3c2a2a;
+        --success: #81c995;
+      }
+    }
+
+    /* =====================
+       Base Styles
+       ===================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      width: 400px;
+      height: 520px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* =====================
+       Header
+       ===================== */
+    .header {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .header-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--bg-active);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .header-icon svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--text-accent);
+    }
+
+    .header-text h1 {
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .header-text p {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+
+    /* =====================
+       Tabs
+       ===================== */
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border-color);
+      flex-shrink: 0;
+    }
+
+    .tab {
+      flex: 1;
+      padding: 12px 16px;
+      font-family: var(--font-family);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      transition: color 0.2s;
+    }
+
+    .tab:hover {
+      color: var(--text-primary);
+      background: var(--bg-hover);
+    }
+
+    .tab.active {
+      color: var(--text-accent);
+    }
+
+    .tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--text-accent);
+      border-radius: 3px 3px 0 0;
+    }
+
+    .tab-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 20px;
+      height: 20px;
+      padding: 0 6px;
+      margin-left: 6px;
+      font-size: 11px;
+      font-weight: 500;
+      background: var(--bg-secondary);
+      border-radius: 10px;
+    }
+
+    .tab.active .tab-badge {
+      background: var(--bg-active);
+      color: var(--text-accent);
+    }
+
+    /* =====================
+       Tab Panels
+       ===================== */
+    .tab-panels {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .tab-panel {
+      display: none;
+      flex-direction: column;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .tab-panel.active {
+      display: flex;
+    }
+
+    .panel-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 20px;
+    }
+
+    /* =====================
+       Section
+       ===================== */
+    .section {
+      margin-bottom: 16px;
+    }
+
+    .section:last-child {
+      margin-bottom: 0;
+    }
+
+    .section-title {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+    }
+
+    /* =====================
+       Form Elements
+       ===================== */
+    .add-form {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .input {
+      flex: 1;
+      padding: 10px 14px;
+      font-size: 14px;
+      font-family: var(--font-family);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      transition: border-color 0.2s;
+    }
+
+    .input:focus {
+      outline: none;
+      border-color: var(--text-accent);
+    }
+
+    .input::placeholder {
+      color: var(--text-secondary);
+    }
+
+    .btn {
+      font-family: var(--font-family);
+      font-size: 14px;
+      font-weight: 500;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-primary {
+      background: var(--text-accent);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.1);
+    }
+
+    .btn-secondary {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-hover);
+    }
+
+    .btn-danger {
+      background: var(--danger-bg);
+      color: var(--danger);
+    }
+
+    .btn-danger:hover {
+      filter: brightness(0.95);
+    }
+
+    .btn svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    /* =====================
+       List Items
+       ===================== */
+    .list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* Category Group */
+    .category-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .category-group-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 0;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .category-group-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .category-group-name {
+      flex: 1;
+    }
+
+    .category-group-count {
+      font-size: 10px;
+      padding: 2px 6px;
+      background: var(--bg-secondary);
+      border-radius: 8px;
+      color: var(--text-secondary);
+    }
+
+    .category-group-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .category-group.uncategorized {
+      margin-top: 8px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .list-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      background: var(--bg-secondary);
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+
+    .list-item:hover {
+      background: var(--bg-hover);
+    }
+
+    .item-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .item-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .item-name {
+      font-size: 14px;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .item-meta {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+
+    .item-actions {
+      display: flex;
+      gap: 4px;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .list-item:hover .item-actions {
+      opacity: 1;
+    }
+
+    .action-btn {
+      width: 28px;
+      height: 28px;
+      padding: 0;
+      border: none;
+      border-radius: 50%;
+      background: transparent;
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .action-btn:hover {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+    }
+
+    .action-btn.delete:hover {
+      background: var(--danger-bg);
+      color: var(--danger);
+    }
+
+    .action-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    /* =====================
+       Notebook Item
+       ===================== */
+    .notebook-item {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 8px;
+      padding: 12px;
+    }
+
+    .notebook-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .notebook-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--bg-hover);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .notebook-icon svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--text-secondary);
+    }
+
+    .notebook-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .notebook-name {
+      font-size: 14px;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .notebook-id {
+      font-size: 11px;
+      color: var(--text-secondary);
+      font-family: monospace;
+      opacity: 0.7;
+    }
+
+    .notebook-categories {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .notebook-cat {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 10px;
+      font-size: 12px;
+      font-weight: 500;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .notebook-cat:hover {
+      filter: brightness(0.9);
+    }
+
+    .notebook-cat .cat-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .notebook-cat .cat-remove {
+      width: 14px;
+      height: 14px;
+      margin-left: 2px;
+      fill: currentColor;
+      opacity: 0.6;
+      cursor: pointer;
+    }
+
+    .notebook-cat .cat-remove:hover {
+      opacity: 1;
+    }
+
+    .add-cat-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 10px;
+      font-size: 12px;
+      font-family: var(--font-family);
+      color: var(--text-secondary);
+      background: transparent;
+      border: 1px dashed var(--border-color);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .add-cat-btn:hover {
+      border-color: var(--text-accent);
+      color: var(--text-accent);
+    }
+
+    .add-cat-btn svg {
+      width: 12px;
+      height: 12px;
+      fill: currentColor;
+    }
+
+    /* =====================
+       Empty State
+       ===================== */
+    .empty-state {
+      text-align: center;
+      padding: 32px 24px;
+      color: var(--text-secondary);
+    }
+
+    .empty-state svg {
+      width: 48px;
+      height: 48px;
+      fill: var(--text-secondary);
+      opacity: 0.5;
+      margin-bottom: 12px;
+    }
+
+    .empty-state p {
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    /* =====================
+       Footer
+       ===================== */
+    .footer {
+      padding: 12px 20px;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .footer .btn {
+      flex: 1;
+      justify-content: center;
+      font-size: 12px;
+      padding: 8px 12px;
+    }
+
+    /* =====================
+       Category Picker
+       ===================== */
+    .picker-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 999;
+    }
+
+    .picker-overlay.active {
+      display: block;
+    }
+
+    .category-picker {
+      display: none;
+      position: fixed;
+      background: var(--bg-primary);
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+      min-width: 200px;
+      max-width: 240px;
+      z-index: 1000;
+      overflow: hidden;
+      animation: slideIn 0.15s ease;
+      display: none;
+      flex-direction: column;
+    }
+
+    .category-picker.active {
+      display: flex;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .picker-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .picker-close {
+      background: none;
+      border: none;
+      width: 20px;
+      height: 20px;
+      padding: 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      border-radius: 4px;
+      transition: all 0.15s;
+    }
+
+    .picker-close:hover {
+      background: var(--bg-hover);
+      color: var(--text-primary);
+    }
+
+    .picker-close svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    .picker-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 6px 0;
+    }
+
+    .picker-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .picker-item:hover {
+      background: var(--bg-hover);
+    }
+
+    .picker-item.selected {
+      background: var(--bg-active);
+    }
+
+    .picker-item .pick-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .picker-item .pick-name {
+      flex: 1;
+    }
+
+    .picker-item .pick-check {
+      width: 16px;
+      height: 16px;
+      fill: var(--text-accent);
+      opacity: 0;
+    }
+
+    .picker-item.selected .pick-check {
+      opacity: 1;
+    }
+
+    .picker-empty {
+      padding: 16px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    /* =====================
+       Dialogs
+       ===================== */
+    .dialog-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .dialog-overlay.active {
+      display: flex;
+    }
+
+    .dialog {
+      background: var(--bg-primary);
+      border-radius: 12px;
+      width: 90%;
+      max-width: 300px;
+      overflow: hidden;
+    }
+
+    .dialog-header {
+      padding: 16px;
+      font-weight: 500;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .dialog-content {
+      padding: 16px;
+    }
+
+    .dialog-actions {
+      padding: 12px 16px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      background: var(--bg-secondary);
+    }
+
+    /* =====================
+       Toast
+       ===================== */
+    .toast {
+      position: fixed;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--text-primary);
+      color: var(--bg-primary);
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 13px;
+      opacity: 0;
+      transition: all 0.3s ease;
+      z-index: 1001;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* =====================
+       Search
+       ===================== */
+    .search-box {
+      margin-bottom: 16px;
+    }
+
+    .search-box .input {
+      width: 100%;
+    }
+
+    /* =====================
+       Settings
+       ===================== */
+    .settings-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .setting-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      background: var(--bg-secondary);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .setting-item:hover {
+      background: var(--bg-hover);
+    }
+
+    .setting-item.sub-setting {
+      margin-left: 24px;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .setting-item.sub-setting.enabled {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .setting-item input[type="checkbox"] {
+      display: none;
+    }
+
+    .setting-checkbox {
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--border-color);
+      border-radius: 4px;
+      flex-shrink: 0;
+      position: relative;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .setting-item input[type="checkbox"]:checked + .setting-checkbox {
+      background: var(--text-accent);
+      border-color: var(--text-accent);
+    }
+
+    .setting-item input[type="checkbox"]:checked + .setting-checkbox::after {
+      content: '';
+      width: 4px;
+      height: 8px;
+      border: solid #fff;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+      margin-bottom: 2px;
+    }
+
+    .setting-label {
+      font-size: 13px;
+      flex: 1;
+    }
+
+    .settings-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .btn-full {
+      width: 100%;
+      justify-content: center;
+    }
+
+    /* =====================
+       Hidden
+       ===================== */
+    .hidden-input {
+      display: none;
+    }
+
+    /* =====================
+       Scrollbar
+       ===================== */
+    .panel-content::-webkit-scrollbar,
+    .picker-list::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .panel-content::-webkit-scrollbar-track,
+    .picker-list::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .panel-content::-webkit-scrollbar-thumb,
+    .picker-list::-webkit-scrollbar-thumb {
+      background: var(--border-color);
+      border-radius: 3px;
+    }
+
+    .panel-content::-webkit-scrollbar-thumb:hover,
+    .picker-list::-webkit-scrollbar-thumb:hover {
+      background: var(--text-secondary);
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-icon" style="background: none; padding: 0;">
+      <img src="icons/logo.png" alt="NotebookLM Tags" style="width: 24px; height: 24px;">
+    </div>
+    <div class="header-text">
+      <h1>NotebookLM Tags</h1>
+      <p>Organize your notebooks</p>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="tab active" data-tab="notebooks">
+      Notebooks<span class="tab-badge" id="notebookCount">0</span>
+    </button>
+    <button class="tab" data-tab="categories">
+      Categories<span class="tab-badge" id="categoryCount">0</span>
+    </button>
+    <button class="tab" data-tab="settings">
+      Settings
+    </button>
+  </div>
+
+  <!-- Tab Panels -->
+  <div class="tab-panels">
+    <!-- Notebooks Panel -->
+    <div class="tab-panel active" id="notebooksPanel">
+      <div class="panel-content">
+        <div class="search-box">
+          <input type="text" class="input" id="notebookSearch" placeholder="Search notebooks...">
+        </div>
+        <div class="list" id="notebooksList">
+          <!-- Notebooks will be rendered here -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Categories Panel -->
+    <div class="tab-panel" id="categoriesPanel">
+      <div class="panel-content">
+        <div class="section">
+          <form class="add-form" id="addCategoryForm">
+            <input type="text" class="input" id="newCategoryInput" placeholder="New category name" required>
+            <button type="submit" class="btn btn-primary">
+              <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+            </button>
+          </form>
+        </div>
+
+        <div class="section">
+          <div class="section-title">Your Categories</div>
+          <div class="list" id="categoriesList">
+            <!-- Categories will be rendered here -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings Panel -->
+    <div class="tab-panel" id="settingsPanel">
+      <div class="panel-content">
+        <div class="section">
+          <div class="section-title">Display Options</div>
+          <div class="settings-list">
+            <label class="setting-item">
+              <input type="checkbox" id="removeEmojiSetting">
+              <span class="setting-checkbox"></span>
+              <span class="setting-label">Remove emoji from notebooks</span>
+            </label>
+            <label class="setting-item sub-setting" id="enlargeTextWrapper">
+              <input type="checkbox" id="enlargeTextSetting" disabled>
+              <span class="setting-checkbox"></span>
+              <span class="setting-label">Enlarge notebook text</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">Data Management</div>
+          <div class="settings-buttons">
+            <button class="btn btn-secondary btn-full" id="exportBtn">
+              <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+              Export Data
+            </button>
+            <button class="btn btn-secondary btn-full" id="importBtn">
+              <svg viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg>
+              Import Data
+            </button>
+            <button class="btn btn-danger btn-full" id="clearBtn">
+              <svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+              Reset All Data
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category Picker Overlay -->
+  <div class="picker-overlay" id="pickerOverlay"></div>
+  
+  <!-- Category Picker -->
+  <div class="category-picker" id="categoryPicker">
+    <div class="picker-header">
+      <span>Assign Categories</span>
+      <button class="picker-close" id="pickerCloseBtn" title="Close">
+        <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+      </button>
+    </div>
+    <div class="picker-list" id="pickerList">
+      <!-- Categories will be rendered here -->
+    </div>
+  </div>
+
+  <!-- Edit Dialog -->
+  <div class="dialog-overlay" id="editDialog">
+    <div class="dialog">
+      <div class="dialog-header">Rename Category</div>
+      <div class="dialog-content">
+        <input type="text" class="input" id="editCategoryInput" placeholder="Category name">
+      </div>
+      <div class="dialog-actions">
+        <button class="btn btn-secondary" id="cancelEditBtn">Cancel</button>
+        <button class="btn btn-primary" id="saveEditBtn">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirm Dialog -->
+  <div class="dialog-overlay" id="confirmDialog">
+    <div class="dialog">
+      <div class="dialog-header" id="confirmTitle">Confirm</div>
+      <div class="dialog-content">
+        <p id="confirmMessage">Are you sure?</p>
+      </div>
+      <div class="dialog-actions">
+        <button class="btn btn-secondary" id="cancelConfirmBtn">Cancel</button>
+        <button class="btn btn-danger" id="confirmConfirmBtn">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <!-- Hidden file input for import -->
+  <input type="file" class="hidden-input" id="importFile" accept=".json">
+
+  <script src="popup.js"></script>
+</body>
+</html>
