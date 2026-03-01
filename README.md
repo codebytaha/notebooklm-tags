@@ -4,7 +4,11 @@
 
 ---
 
-![App Demo](https://github.com/user-attachments/assets/4b8b1cbb-6a54-4fbd-aaae-ca819d697cc0)
+<details>
+  <summary><b>▶️ View Demo</b> <sub>(click to load)</sub></summary>
+  <br>
+  <img src="https://github.com/user-attachments/assets/4b8b1cbb-6a54-4fbd-aaae-ca819d697cc0" width="600" alt="Demo">
+</details>
 
 ## Features
 
@@ -14,7 +18,12 @@
 - **Local Storage**: All tags and metadata are stored locally on your device via Chrome sync storage. No external servers or telemetry.
 - **Import/Export**: Easily backup or migrate your organization system using JSON exports.
 
-![Popup Preview](https://github.com/user-attachments/assets/8bfe0929-b9b8-4830-95e0-4111c297d8c6)
+<details>
+  <summary><b>▶️ View Popup Preview</b> <sub>(click to load)</sub></summary>
+  <br>
+  <img src="https://github.com/user-attachments/assets/8bfe0929-b9b8-4830-95e0-4111c297d8c6" width="600" alt="Popup Preview">
+</details>
+
 ## Installation
 
 ### From the Chrome Web Store
